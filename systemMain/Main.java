@@ -13,24 +13,28 @@ public class Main {
         String accountName = sc.nextLine();
         System.out.print("Please insert your account number: ");
         int accountNumber = sc.nextInt();
-        BankAccount account = new BankAccount(accountName, accountNumber);
-
-        System.out.println("Account created successfully!");
-        System.out.println("Hello " + accountName + ", welcome to the bank!");
-        System.out.println("Account Name: " + account.getAccountName());
-        System.out.println("Account Number: " + account.getAccountNumber());
+        BankAccount account;
         System.out.print("Do you want to deposit money? (yes/no): ");
         String depositChoice = sc.next();
         if (depositChoice.equalsIgnoreCase("yes")) {
             System.out.print("Please insert the amount to deposit: ");
             double depositAmount = sc.nextDouble();
-            account.deposit(depositAmount);
+            account = new BankAccount(accountName, accountNumber, depositAmount);
             System.out.printf("Deposit successful! Your new balance is: %.2f%n ", account.getAccountBalance());
         } else if (depositChoice.equalsIgnoreCase("no")) {
+            account = new BankAccount(accountName, accountNumber);
             System.out.printf("No deposit made. Your current balance is: %.2f%n", account.getAccountBalance());
+          
         } else {
             System.out.println("Invalid choice. Please enter 'yes' or 'no'.");
+            account = new BankAccount(accountName, accountNumber);
         }
+        
+
+        System.out.println("Account created successfully!");
+        System.out.println("Hello " + accountName + ", welcome to the bank!");
+        System.out.println("Account Name: " + account.getAccountName());
+        System.out.println("Account Number: " + account.getAccountNumber());
 
         String continueChoice;
         do {
@@ -52,7 +56,8 @@ public class Main {
                     System.out.print("Please insert the amount to withdraw:");
                     double withdrawAmount = sc.nextDouble();
                     account.withdraw(withdrawAmount);
-                    System.out.printf("Withdrawal successful! Your new balance is: %.2f%n", account.getAccountBalance());
+                    System.out.printf("Withdrawal successful! Your new balance is: %.2f%n",
+                            account.getAccountBalance());
                 }
             }
         } while (continueChoice.equalsIgnoreCase("yes"));
